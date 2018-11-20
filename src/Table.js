@@ -12,28 +12,32 @@ const TableHeader = () => {
 }
 
 const TableBody = props => {
-    const row = props.characterData.map((row, index) => {
+    const rows = props.characterData.map((row, index) => {
         return (
             <tr key={index}>
                 <td>{row.name}</td>
                 <td>{row.job}</td>
+                <td><button onClick={() => { props.removeCharacter(index) }}>delete</button></td>
             </tr>
         )
     })
     return (
-        <tbody>{row}</tbody>
+        <tbody>{rows}</tbody>
     )
 }
 
 class Table extends Component {
     render() {
 
-        const { characterData } = this.props
+        const { characterData, removeCharacter } = this.props
 
         return (
             <table>
                 <TableHeader />
-                <TableBody characterData={characterData} />
+                <TableBody
+                    characterData={characterData}
+                    removeCharacter={removeCharacter}
+                />
             </table>
         )
     }
